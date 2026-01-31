@@ -25,6 +25,10 @@
             <column name="position" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
+
+            <column name="photo_url" type="varchar(255)">
+
+            </column>
         </createTable>
     </changeSet>
 

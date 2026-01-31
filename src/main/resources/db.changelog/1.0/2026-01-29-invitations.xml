@@ -19,6 +19,11 @@
                              referencedTableName="users"
                              referencedColumnNames="id"/>
             </column>
+
+            <column name="meeting_id" type="bigint"> <constraints nullable="false" foreignKeyName="fk_invitations_meetings"
+                                                                  referencedTableName="meetings"
+                                                                  referencedColumnNames="id"/>
+            </column>
         </createTable>
     </changeSet>
 

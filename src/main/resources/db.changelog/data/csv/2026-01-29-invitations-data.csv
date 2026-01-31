@@ -1,2 +1,2 @@
-user_id;status
-1;Ожидается
+user_id;status;meeting_id
+1;Ожидается;1
