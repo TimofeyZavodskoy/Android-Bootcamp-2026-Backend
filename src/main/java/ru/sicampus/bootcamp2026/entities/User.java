@@ -28,9 +28,9 @@ public class User {
     @Column
     private String photoUrl;
 
-    @OneToMany(mappedBy = "user")
-    private List<Invitation>  invitations;
-
-    @OneToMany(mappedBy = "organizer")
+    @OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Meeting> organizedMeetings;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Invitation> invitations;
 }
