@@ -1,6 +1,9 @@
 package ru.sicampus.bootcamp2026.services.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.sicampus.bootcamp2026.dtos.UserDto;
@@ -18,7 +21,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
     private final MeetingRepository meetingRepository;
@@ -75,5 +78,12 @@ public class UserServiceImpl implements UserService {
             throw new UserNotFound("Не удалось удалить: пользователь не найден");
         }
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return UserDetailsImpl.build(user);
     }
 }
